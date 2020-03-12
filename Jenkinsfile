@@ -1,18 +1,18 @@
 pipeline{
-  agent { node { label 'AWSRHEL' } } 
+  agent { node { label 'globes' } } 
   tools {
       git 'git'
       maven 'maven'
   }
   environment {
     IMAGE_TAG = "${env.BUILD_NUMBER}"
-    myImageName = "tomcattrain"
-    myDockerhub = "mohanraj123"
+    myImageName = "gampa"
+    myDockerhub = "aneel123"
   }
   stages{
     stage('SCM Checkout'){
      steps{
-          git 'https://github.com/mohansgithub/new-web-app.git'
+          git 'https://github.com/aneel3726github/new-web-app.git'
           }
   }
 
@@ -36,7 +36,7 @@ pipeline{
     }
     stage('Build & Deploy New Image'){
      steps{
-        withCredentials([usernamePassword(credentialsId: '917d784e-df86-43c6-9919-133dae97fd05',usernameVariable: 'ARTIUSERNAME', passwordVariable: 'ARTIPASSWORD')]){
+        withCredentials([usernamePassword(credentialsId: 'c5d27e0d-75a3-49be-b979-2c867f490307',usernameVariable: 'DOCKERUSERNAME', passwordVariable: 'DOCKERPASSWORD')]){
         script {
           sh '''
            sudo docker login -u ${ARTIUSERNAME} -p ${ARTIPASSWORD} docker.io
